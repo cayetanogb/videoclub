@@ -20,10 +20,10 @@ Route::get('auth/login', function () {
     return view('auth.login');
 });
 
-Route::get('catalog', 'CatalogController@getIndex');
+Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
 
 Route::get('catalog/show/{id}', 'CatalogController@getShow');
 
 Route::get('catalog/create', 'CatalogController@getCreate');
 
-Route::get('catalog/edit/{id}', 'CatalogController@getEdit');
+Route::get('catalog/edit/{id}', 'CatalogController@getEdit')->name('editar');

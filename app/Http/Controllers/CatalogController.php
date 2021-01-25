@@ -174,7 +174,7 @@ class CatalogController extends Controller
     }
 
     public function getShow($id) {
-        return view('catalog.show', array('id'=>$this->arrayPeliculas[$id]));
+        return view('catalog.show', ['pelicula'=>$this->arrayPeliculas[$id], 'id' => $id]);
     }
 
     public function getCreate() {
