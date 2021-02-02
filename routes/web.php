@@ -22,8 +22,12 @@ Route::get('auth/login', function () {
 
 Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
 
-Route::get('catalog/show/{id}', 'CatalogController@getShow');
+Route::get('catalog/show/{id}', 'CatalogController@getShow')->name('show');
 
-Route::get('catalog/create', 'CatalogController@getCreate');
+Route::get('catalog/create', 'CatalogController@getCreate')->name('create');
 
-Route::get('catalog/edit/{id}', 'CatalogController@getEdit')->name('editar');
+Route::get('catalog/{id}/edit', 'CatalogController@getEdit')->name('editar');
+
+Route::put('catalog/{id}', 'CatalogController@getUpdate')->name('update');
+
+Route::post('catalog/add', 'CatalogController@getAdd')->name('add');

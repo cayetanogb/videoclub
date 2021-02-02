@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body" style="padding:30px">
 
-                    <form action="" method="post">
+                    <form action="{{route('add')}}" method="post">
                         @csrf
 
                         <div class="form-group">
