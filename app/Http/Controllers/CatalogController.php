@@ -22,8 +22,20 @@ class CatalogController extends Controller
     public function getEdit($id) {
         return view('catalog.edit', ['pelicula' => Movie::findOrFail($id), 'id'=>$id]);
     }
+    
+    public function postCreate(Request $request) {
+        $pelicula = new Movie;
+        $pelicula->title = $request->input('title');
+        $pelicula->year = $request->input('year');
+        $pelicula->director = $request->input('director');
+        $pelicula->poster = $request->input('poster');
+        $pelicula->synopsis = $request->input('synopsis');
+        $pelicula->save();
+    
+        return redirect()->route('catalog');
+    }
 
-    public function getUpdate(Request $request, $id) {
+    public function putEdit(Request $request, $id) {
         $pelicula = Movie::findOrFail($id);
         $pelicula->title = $request->input('title');
         $pelicula->year = $request->input('year');
@@ -35,15 +47,4 @@ class CatalogController extends Controller
         return redirect()->route('catalog');
     }
 
-    public function getAdd(Request $request) {
-        $pelicula = new Movie;
-        $pelicula->title = $request->input('title');
-        $pelicula->year = $request->input('year');
-        $pelicula->director = $request->input('director');
-        $pelicula->poster = $request->input('poster');
-        $pelicula->synopsis = $request->input('synopsis');
-        $pelicula->save();
-    
-        return redirect()->route('catalog');
-    }
 }

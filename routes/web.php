@@ -1,33 +1,29 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', 'HomeController@getHome');
 
-Route::get('auth/login', function () {
-    return view('auth.login');
+Route::middleware('auth')->group(function () {
+    Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
+    
+    Route::get('catalog/show/{id}', 'CatalogController@getShow')->name('show');
+    
+    Route::get('catalog/create', 'CatalogController@getCreate')->name('create');
+    
+    Route::get('catalog/{id}/edit', 'CatalogController@getEdit')->name('editar');
+    
+    Route::put('catalog/{id}', 'CatalogController@putEdit')->name('update');
+    
+    Route::post('catalog/add', 'CatalogController@postCreate')->name('add');
+    
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-Route::get('catalog', 'CatalogController@getIndex')->name('catalog');
+Auth::routes();
 
-Route::get('catalog/show/{id}', 'CatalogController@getShow')->name('show');
-
-Route::get('catalog/create', 'CatalogController@getCreate')->name('create');
-
-Route::get('catalog/{id}/edit', 'CatalogController@getEdit')->name('editar');
-
-Route::put('catalog/{id}', 'CatalogController@getUpdate')->name('update');
-
-Route::post('catalog/add', 'CatalogController@getAdd')->name('add');
+Route::get('/logout', function () {
+    return view('auth.logout');
+})->name('logout');
